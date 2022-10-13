@@ -1,11 +1,20 @@
 import { useState } from 'react';
+import { ImSearch } from 'react-icons/im';
 
-export default function Form({ getResponse }) {
+import {
+  FormButton,
+  Input,
+  Label,
+  FormWrapper,
+  Container,
+} from './Form.styled';
+
+export default function Form({ getResponse, onSubmit }) {
   const [inputValue, setInputValue] = useState('');
-  const [, setQuery] = useState('');
+
   const getMoviesBySearch = e => {
     e.preventDefault();
-    setQuery(inputValue);
+    onSubmit(inputValue);
     setInputValue('');
   };
   const inputHandler = e => {
@@ -13,18 +22,22 @@ export default function Form({ getResponse }) {
   };
 
   return (
-    <>
-      <form onSubmit={getMoviesBySearch}>
-        <label>
-          <input
-            onChange={inputHandler}
-            value={inputValue}
-            type="text"
-            name="search"
-          />
-        </label>
-        <button type="submit">Search a movie</button>
-      </form>
-    </>
+    <Container>
+      <FormWrapper onSubmit={getMoviesBySearch}>
+        <Input
+          onChange={inputHandler}
+          value={inputValue}
+          className="input"
+          type="text"
+          autoComplete="off"
+          autoFocus
+          placeholder="Search images and photos"
+        />
+        <FormButton type="submit">
+          <ImSearch />
+          <Label></Label>
+        </FormButton>
+      </FormWrapper>
+    </Container>
   );
 }
