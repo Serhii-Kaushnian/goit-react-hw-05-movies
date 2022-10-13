@@ -41,7 +41,7 @@ export default function Home({ handleResponse }) {
   return (
     <div>
       <GalleryWrapper>
-        {response &&
+        {response.length > 0 &&
           response.map(value => (
             <Link to={`${value.id}`}>
               <GalleryItemWrapper key={value.id}>

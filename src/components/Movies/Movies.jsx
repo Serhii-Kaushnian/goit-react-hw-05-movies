@@ -15,7 +15,7 @@ export default function Home({ handleQuery, response, onClick, loader }) {
       <Form onSubmit={handleQuery} />
 
       <GalleryWrapper>
-        {response &&
+        {response.length > 0 &&
           response.map(value => (
             <Link to={`${value.id}`}>
               <GalleryItemWrapper key={value.id}>
