@@ -7,7 +7,7 @@ import { Header } from './App.styled.js';
 import Form from 'components/Form/Form.jsx';
 
 const APP_KEY = `8fcb73b25bea8ff19ff1e6b792856201`;
-const GENRES = `https://api.themoviedb.org/3/genre/movie/list?api_key=${APP_KEY}&language=en-US`;
+// const GENRES = `https://api.themoviedb.org/3/genre/movie/list?api_key=${APP_KEY}&language=en-US`;
 // `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${query}&page=${page}`;
 export const App = () => {
   const [response, setResponse] = useState([]);
