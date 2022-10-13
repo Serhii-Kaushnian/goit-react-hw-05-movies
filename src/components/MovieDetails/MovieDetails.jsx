@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { MovieDetailsWrapper } from './MovieDetails.styled';
 
 export default function MovieDetails({ response }) {
-  console.log(response);
   const { id } = useParams();
   getProductById();
   function getProductById() {
