@@ -50,8 +50,7 @@ export const App = () => {
         <Form />
       </Header>
       <Routes>
-        {response && <Route path="/" element={<Home response={response} />} />}
-
+        <Route path="/" element={<Home response={response} />} />
         <Route path="/movies" element={<Movies />} />
         <Route path="*" element={<Home />} />
       </Routes>
