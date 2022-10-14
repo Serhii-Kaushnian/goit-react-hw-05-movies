@@ -10,8 +10,12 @@ export default function MovieDetails({ response }) {
     let idNumber = Number(id);
     return response.find(value => value.id === idNumber);
   }
-  let movieData = getMovieById();
-
+  let movieData = {};
+  if (!response) {
+    console.log('test');
+    movieData = getMovieById();
+  }
+  console.log('test2');
   return (
     <>
       {response && (
