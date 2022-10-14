@@ -4,9 +4,7 @@ import { MovieDetailsWrapper } from './MovieDetails.styled';
 
 export default function MovieDetails({ response }) {
   const { id } = useParams();
-  if (!response) {
-    return;
-  }
+
   getMovieById();
   function getMovieById() {
     let idNumber = Number(id);
@@ -15,13 +13,17 @@ export default function MovieDetails({ response }) {
   let movieData = getMovieById();
 
   return (
-    <MovieDetailsWrapper>
-      <img
-        src={`https://image.tmdb.org/t/p/original/${movieData.poster_path}`}
-        alt={movieData.title ? movieData.title : movieData.name}
-        width="300px"
-      />
-      <p>{movieData.title ? movieData.title : movieData.name}</p>
-    </MovieDetailsWrapper>
+    <>
+      {response && (
+        <MovieDetailsWrapper>
+          <img
+            src={`https://image.tmdb.org/t/p/original/${movieData.poster_path}`}
+            alt={movieData.title ? movieData.title : movieData.name}
+            width="300px"
+          />
+          <p>{movieData.title ? movieData.title : movieData.name}</p>
+        </MovieDetailsWrapper>
+      )}
+    </>
   );
 }
