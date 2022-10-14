@@ -18,6 +18,7 @@ export const App = () => {
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState('');
   const [loader, setLoader] = useState(false);
+  const [firstRender, setFirstRender] = useState(false);
 
   useEffect(() => {
     let url = '';
@@ -35,6 +36,8 @@ export const App = () => {
           toast.info(`Search request ${query} is not found. Please  try again`);
         }
         setResponse(prev => [...prev, ...resp.data.results]);
+        setFirstRender(true);
+
         setLoader(false);
       } catch (err) {
         console.error(err);
@@ -91,7 +94,12 @@ export const App = () => {
           path="/"
           element={<Home handleResponse={homeResponseHandler} />}
         />
-        <Route path="/:id" element={<MovieDetails response={homeResponse} />} />
+        {firstRender && (
+          <Route
+            path="/:id"
+            element={<MovieDetails response={homeResponse} />}
+          />
+        )}
         <Route
           path="/movies"
           element={
@@ -103,10 +111,12 @@ export const App = () => {
             />
           }
         />
-        <Route
-          path="/movies/:id"
-          element={<MovieDetails response={response} />}
-        />
+        {firstRender && (
+          <Route
+            path="/movies/:id"
+            element={<MovieDetails response={response} />}
+          />
+        )}
         <Route path="*" element={<Home />} />
       </Routes>
     </div>
