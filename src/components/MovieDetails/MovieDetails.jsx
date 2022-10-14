@@ -4,12 +4,15 @@ import { MovieDetailsWrapper } from './MovieDetails.styled';
 
 export default function MovieDetails({ response }) {
   const { id } = useParams();
-  getProductById();
-  function getProductById() {
+  if (!response) {
+    return;
+  }
+  getMovieById();
+  function getMovieById() {
     let idNumber = Number(id);
     return response.find(value => value.id === idNumber);
   }
-  let movieData = getProductById();
+  let movieData = getMovieById();
 
   return (
     <MovieDetailsWrapper>
