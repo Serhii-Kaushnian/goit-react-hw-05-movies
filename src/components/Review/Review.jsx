@@ -4,6 +4,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 import Loader from 'components/Loader/Loader';
+import { RewievList, RewievListItem, RewievWrapper } from './Review.styled';
 
 const APP_KEY = `8fcb73b25bea8ff19ff1e6b792856201`;
 const BASE_URL = `https://api.themoviedb.org/3/`;
@@ -35,18 +36,18 @@ export default function Review() {
   }, [id]);
 
   return (
-    <div>
+    <RewievWrapper>
       {loader && <Loader />}
       {review.length !== 0 && (
-        <>
+        <RewievList>
           {review.map(value => (
-            <>
+            <RewievListItem key={value.id}>
               <h3>{value.author}</h3>
               <p>{value.content}</p>
-            </>
+            </RewievListItem>
           ))}
-        </>
+        </RewievList>
       )}
-    </div>
+    </RewievWrapper>
   );
 }

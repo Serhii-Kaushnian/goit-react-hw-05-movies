@@ -1,9 +1,31 @@
 import { Link, Outlet, useParams } from 'react-router-dom';
-import { MovieDetailsWrapper } from './MovieDetails.styled';
+import {
+  MovieCustomLinksWrapper,
+  MovieDetailsWrapper,
+  MovieTitle,
+} from './MovieDetails.styled';
 import Poster from '../../img/poster.png';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import styled from '@emotion/styled';
+import Loader from 'components/Loader/Loader';
+
+const CustomLink = styled(Link)`
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  background-color: #cbcbc8;
+  padding: 10px;
+  min-width: 90px;
+  color: black;
+  font-weight: 800;
+  font-size: 20px;
+  border-radius: 10px;
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
+`;
 
 const APP_KEY = `8fcb73b25bea8ff19ff1e6b792856201`;
 const BASE_URL = `https://api.themoviedb.org/3/`;
@@ -37,6 +59,8 @@ export default function MovieDetails() {
 
   return (
     <>
+      {loader && <Loader />}
+
       {movie && (
         <MovieDetailsWrapper>
           <img
@@ -46,13 +70,15 @@ export default function MovieDetails() {
                 : Poster
             }
             alt={movie?.title ? movie?.title : movie?.name}
-            width="300px"
+            width="250px"
           />
-          <p>{movie?.title ? movie?.title : movie?.name}</p>
+          <MovieTitle>{movie?.title ? movie?.title : movie?.name}</MovieTitle>
         </MovieDetailsWrapper>
       )}
-      <Link to="reviews">Review</Link>
-      <Link to="cast">Cast</Link>
+      <MovieCustomLinksWrapper>
+        <CustomLink to="reviews">Review</CustomLink>
+        <CustomLink to="cast">Cast</CustomLink>
+      </MovieCustomLinksWrapper>
       <Outlet />
     </>
   );

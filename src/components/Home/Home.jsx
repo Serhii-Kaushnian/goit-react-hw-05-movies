@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import axios from 'axios';
 import Poster from '../../img/poster.png';
+import styled from '@emotion/styled';
 
 import {
   GalleryItemImage,
@@ -11,15 +12,19 @@ import {
   MovieTitle,
 } from './Home.styled';
 import Loader from 'components/Loader/Loader.jsx';
+const CustomLink = styled(Link)`
+  color: black;
+  font-weight: 800;
+  font-size: 20px;
+  text-decoration: none;
+`;
 const APP_KEY = `8fcb73b25bea8ff19ff1e6b792856201`;
 const BASE_URL = `https://api.themoviedb.org/3/`;
-export default function Home({ handleResponse }) {
+export default function Home() {
   const [response, setResponse] = useState([]);
   const [page, setPage] = useState(1);
   const [loader, setLoader] = useState(false);
-  useEffect(() => {
-    handleResponse(response);
-  }, [handleResponse, response]);
+
   useEffect(() => {
     const url = `${BASE_URL}trending/movie/day?api_key=${APP_KEY}&page=${page}`;
     async function sendGetRequest(link) {
@@ -44,8 +49,8 @@ export default function Home({ handleResponse }) {
         <GalleryWrapper>
           <Outlet />
           {response.map(value => (
-            <Link to={`${value.id}`}>
-              <GalleryItemWrapper key={value.id}>
+            <GalleryItemWrapper key={value.id}>
+              <CustomLink to={`${value.id}`}>
                 <GalleryItemImage
                   src={
                     value.poster_path
@@ -58,8 +63,8 @@ export default function Home({ handleResponse }) {
                 <MovieTitle>
                   {value.title ? value.title : value.name}
                 </MovieTitle>
-              </GalleryItemWrapper>
-            </Link>
+              </CustomLink>
+            </GalleryItemWrapper>
           ))}
         </GalleryWrapper>
       ) : null}

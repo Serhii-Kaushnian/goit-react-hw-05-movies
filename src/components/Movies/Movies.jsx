@@ -13,19 +13,23 @@ import {
   MovieTitle,
 } from './Movies.styled';
 import Form from 'components/Form/Form.jsx';
+import styled from '@emotion/styled';
 
 const APP_KEY = `8fcb73b25bea8ff19ff1e6b792856201`;
 const BASE_URL = `https://api.themoviedb.org/3/`;
-
-export default function Movies({ handleResponse }) {
+const CustomLink = styled(Link)`
+  color: black;
+  font-weight: 800;
+  font-size: 20px;
+  text-decoration: none;
+`;
+export default function Movies() {
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState('');
   const [loader, setLoader] = useState(false);
   const [response, setResponse] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
-  useEffect(() => {
-    handleResponse(response);
-  }, [response, handleResponse]);
+
   useEffect(() => {
     if (query.length > 0) {
       let url = `${BASE_URL}search/movie?api_key=${APP_KEY}&language=en-US&page=${page}&include_adult=false&query=${query}`;
@@ -79,8 +83,8 @@ export default function Movies({ handleResponse }) {
       {response.length > 0 ? (
         <GalleryWrapper>
           {response.map(value => (
-            <Link to={`${value.id}`}>
-              <GalleryItemWrapper key={value.id}>
+            <GalleryItemWrapper key={value.id}>
+              <CustomLink to={`${value.id}`}>
                 <GalleryItemImage
                   src={
                     value.poster_path
@@ -93,8 +97,8 @@ export default function Movies({ handleResponse }) {
                 <MovieTitle>
                   {value.title ? value.title : value.name}
                 </MovieTitle>
-              </GalleryItemWrapper>
-            </Link>
+              </CustomLink>
+            </GalleryItemWrapper>
           ))}
         </GalleryWrapper>
       ) : null}
