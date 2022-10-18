@@ -3,6 +3,7 @@ import {
   MovieCustomLinksWrapper,
   MovieDetailsWrapper,
   MovieTitle,
+  PosterWrapper,
 } from './MovieDetails.styled';
 import Poster from '../../img/poster.png';
 import { useEffect, useState } from 'react';
@@ -32,6 +33,7 @@ const BASE_URL = `https://api.themoviedb.org/3/`;
 export default function MovieDetails() {
   const { id } = useParams();
   const [movie, setMovie] = useState([]);
+  console.log('movie: ', movie);
   const [loader, setLoader] = useState(false);
   useEffect(() => {
     sendGetRequest(id);
@@ -63,16 +65,36 @@ export default function MovieDetails() {
 
       {movie && (
         <MovieDetailsWrapper>
-          <img
-            src={
-              movie.poster_path
-                ? `https://image.tmdb.org/t/p/original/${movie.poster_path}`
-                : Poster
-            }
-            alt={movie?.title ? movie?.title : movie?.name}
-            width="250px"
-          />
-          <MovieTitle>{movie?.title ? movie?.title : movie?.name}</MovieTitle>
+          <PosterWrapper>
+            <img
+              src={
+                movie.poster_path
+                  ? `https://image.tmdb.org/t/p/original/${movie.poster_path}`
+                  : Poster
+              }
+              alt={movie?.title ? movie?.title : movie?.name}
+              width="250px"
+            />
+            <MovieTitle>{movie?.title ? movie?.title : movie?.name}</MovieTitle>
+          </PosterWrapper>
+          <div>
+            <h4>Genres</h4>
+            <div>
+              <ul>
+                {movie.genres &&
+                  movie.genres.map(value => (
+                    <li key={value.id}>
+                      <p>{value.name}</p>
+                    </li>
+                  ))}
+              </ul>
+            </div>
+            <h4>User rating: {`${Math.round(movie.vote_average * 10)}%`}</h4>
+            <div>
+              <h4>Overview</h4>
+              <p>{movie.overview}</p>
+            </div>
+          </div>
         </MovieDetailsWrapper>
       )}
       <MovieCustomLinksWrapper>

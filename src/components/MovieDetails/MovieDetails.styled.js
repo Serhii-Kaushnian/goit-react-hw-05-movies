@@ -1,11 +1,9 @@
 import styled from '@emotion/styled';
 export const MovieDetailsWrapper = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   padding: 10px;
-  width: 250px;
 `;
 export const MovieCustomLinksWrapper = styled.div`
   display: flex;
@@ -13,4 +11,7 @@ export const MovieCustomLinksWrapper = styled.div`
 `;
 export const MovieTitle = styled.h2`
   text-align: center;
+`;
+export const PosterWrapper = styled.div`
+  margin-right: 10px;
 `;
