@@ -18,7 +18,7 @@ const BASE_URL = `https://api.themoviedb.org/3/`;
 export default function MovieDetails() {
   const { id } = useParams();
   const location = useLocation();
-  const navigate = useNavigate();
+
   console.log('location: ', location);
   const [movie, setMovie] = useState([]);
   const [loader, setLoader] = useState(false);
