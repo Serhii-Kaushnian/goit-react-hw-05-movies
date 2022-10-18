@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import Poster from '../../img/poster.png';
 
 import Loader from 'components/Loader/Loader.jsx';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import {
   GalleryItemImage,
   GalleryItemWrapper,
@@ -29,7 +29,7 @@ export default function Movies() {
   const [loader, setLoader] = useState(false);
   const [response, setResponse] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
-
+  const location = useLocation();
   useEffect(() => {
     if (query.length > 0) {
       let url = `${BASE_URL}search/movie?api_key=${APP_KEY}&language=en-US&page=${page}&include_adult=false&query=${query}`;
@@ -84,7 +84,7 @@ export default function Movies() {
         <GalleryWrapper>
           {response.map(value => (
             <GalleryItemWrapper key={value.id}>
-              <CustomLink to={`${value.id}`}>
+              <CustomLink to={`${value.id}`} state={{ from: location }}>
                 <GalleryItemImage
                   src={
                     value.poster_path

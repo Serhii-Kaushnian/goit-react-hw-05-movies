@@ -1,39 +1,26 @@
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Outlet, useParams, useLocation, useNavigate } from 'react-router-dom';
 import {
   MovieCustomLinksWrapper,
   MovieDetailsWrapper,
   MovieTitle,
   PosterWrapper,
+  CustomLink,
 } from './MovieDetails.styled';
 import Poster from '../../img/poster.png';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import styled from '@emotion/styled';
-import Loader from 'components/Loader/Loader';
 
-const CustomLink = styled(Link)`
-  display: inline-block;
-  text-align: center;
-  text-decoration: none;
-  background-color: #cbcbc8;
-  padding: 10px;
-  min-width: 90px;
-  color: black;
-  font-weight: 800;
-  font-size: 20px;
-  border-radius: 10px;
-  &:not(:last-child) {
-    margin-right: 10px;
-  }
-`;
+import Loader from 'components/Loader/Loader';
 
 const APP_KEY = `8fcb73b25bea8ff19ff1e6b792856201`;
 const BASE_URL = `https://api.themoviedb.org/3/`;
 export default function MovieDetails() {
   const { id } = useParams();
+  const location = useLocation();
+  const navigate = useNavigate();
+  console.log('location: ', location);
   const [movie, setMovie] = useState([]);
-  console.log('movie: ', movie);
   const [loader, setLoader] = useState(false);
   useEffect(() => {
     sendGetRequest(id);
@@ -43,7 +30,6 @@ export default function MovieDetails() {
         const resp = await axios.get(
           `${BASE_URL}movie/${movieId}?api_key=${APP_KEY}&language=en-US`
         );
-        console.log('resp: ', resp);
         if (resp.data.length === 0) {
           toast.info(`There is no reviews for this movie`);
           setLoader(false);
@@ -62,6 +48,8 @@ export default function MovieDetails() {
   return (
     <>
       {loader && <Loader />}
+
+      <CustomLink to={location.state?.from || '/'}>Go back</CustomLink>
 
       {movie && (
         <MovieDetailsWrapper>

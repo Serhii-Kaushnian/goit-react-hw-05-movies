@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Poster from '../../img/poster.png';
 import styled from '@emotion/styled';
@@ -24,6 +24,7 @@ export default function Home() {
   const [response, setResponse] = useState([]);
   const [page, setPage] = useState(1);
   const [loader, setLoader] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const url = `${BASE_URL}trending/movie/day?api_key=${APP_KEY}&page=${page}`;
@@ -50,7 +51,7 @@ export default function Home() {
           <Outlet />
           {response.map(value => (
             <GalleryItemWrapper key={value.id}>
-              <CustomLink to={`${value.id}`}>
+              <CustomLink to={`${value.id}`} state={{ from: location }}>
                 <GalleryItemImage
                   src={
                     value.poster_path
