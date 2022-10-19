@@ -1,4 +1,4 @@
-import { Outlet, useParams, useLocation, useNavigate } from 'react-router-dom';
+import { Outlet, useParams, useLocation } from 'react-router-dom';
 import {
   MovieCustomLinksWrapper,
   MovieDetailsWrapper,
