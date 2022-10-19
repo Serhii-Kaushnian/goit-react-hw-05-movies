@@ -24,4 +24,5 @@ export const CastListItem = styled.li`
   border-radius: 10px;
   -webkit-box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.53);
   box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.53);
+  padding: 10px;
 `;
