@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export const MovieDetailsWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: flex-start;
   padding: 10px;
 `;
