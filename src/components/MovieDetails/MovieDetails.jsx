@@ -5,6 +5,7 @@ import {
   MovieTitle,
   PosterWrapper,
   CustomLink,
+  GoBackLink,
 } from './MovieDetails.styled';
 import Poster from '../../img/poster.png';
 import { useEffect, useState } from 'react';
@@ -19,7 +20,6 @@ export default function MovieDetails() {
   const { id } = useParams();
   const location = useLocation();
 
-  console.log('location: ', location);
   const [movie, setMovie] = useState([]);
   const [loader, setLoader] = useState(false);
   useEffect(() => {
@@ -49,7 +49,7 @@ export default function MovieDetails() {
     <>
       {loader && <Loader />}
 
-      <CustomLink to={location.state?.from || '/'}>Go back</CustomLink>
+      <GoBackLink to={location.state?.from || '/'}>Go back</GoBackLink>
 
       {movie && (
         <MovieDetailsWrapper>
