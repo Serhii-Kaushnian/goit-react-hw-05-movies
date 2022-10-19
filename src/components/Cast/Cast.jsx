@@ -10,7 +10,7 @@ const BASE_URL = `https://api.themoviedb.org/3/`;
 export default function Cast() {
   const { id } = useParams();
   const [cast, setCast] = useState([]);
-  console.log('cast: ', cast);
+
   const [loader, setLoader] = useState(false);
   useEffect(() => {
     sendGetRequest(id);
@@ -33,7 +33,6 @@ export default function Cast() {
       }
     }
   }, [id]);
-  console.log(cast);
 
   return (
     <CastWrapper>
