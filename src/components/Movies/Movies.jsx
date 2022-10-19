@@ -105,9 +105,11 @@ export default function Movies() {
 
       {loader && <Loader />}
 
-      <LoadMoreButton onClick={loadMore} type="button">
-        Load more
-      </LoadMoreButton>
+      {query && (
+        <LoadMoreButton onClick={loadMore} type="button">
+          Load more
+        </LoadMoreButton>
+      )}
     </div>
   );
 }

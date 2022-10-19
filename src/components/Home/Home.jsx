@@ -51,7 +51,7 @@ export default function Home() {
           <Outlet />
           {response.map(value => (
             <GalleryItemWrapper key={value.id}>
-              <CustomLink to={`${value.id}`} state={{ from: location }}>
+              <CustomLink to={`movies/${value.id}`} state={{ from: location }}>
                 <GalleryItemImage
                   src={
                     value.poster_path

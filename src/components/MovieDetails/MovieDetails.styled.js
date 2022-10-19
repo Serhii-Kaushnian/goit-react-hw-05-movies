@@ -28,12 +28,17 @@ export const CustomLink = styled(Link)`
   font-weight: 800;
   font-size: 20px;
   border-radius: 10px;
+  transition: background-color 250ms ease;
 
   &:not(:last-child) {
     margin-right: 10px;
   }
+  &:hover,
+  &:focus {
+    background-color: #adadad;
+  }
 `;
-export const GoBackLink = styled(Link)`
+export const GoBackLink = styled.button`
   display: inline-block;
   text-align: center;
   text-decoration: none;
@@ -46,4 +51,11 @@ export const GoBackLink = styled(Link)`
   border-radius: 10px;
   margin-left: 10px;
   margin-top: 10px;
+  border: none;
+  transition: background-color 250ms ease;
+
+  &:hover,
+  &:focus {
+    background-color: #adadad;
+  }
 `;

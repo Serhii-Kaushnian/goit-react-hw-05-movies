@@ -1,22 +1,9 @@
 import { Header } from 'components/App/App.styled';
 import Loader from 'components/Loader/Loader';
 import React, { Suspense } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
-import styled from '@emotion/styled';
-import { NavList, NavListItem } from './SharedLayout.styled';
+import { Outlet } from 'react-router-dom';
 
-const CustomLink = styled(NavLink)`
-  display: inline-block;
-  text-align: center;
-  text-decoration: none;
-  background-color: #cbcbc8;
-  padding: 10px;
-  min-width: 90px;
-  color: black;
-  font-weight: 800;
-  font-size: 20px;
-  border-radius: 10px;
-`;
+import { NavList, NavListItem, CustomLink } from './SharedLayout.styled';
 
 export default function SharedLayout() {
   return (

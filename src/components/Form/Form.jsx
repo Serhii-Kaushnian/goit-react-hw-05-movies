@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ImSearch } from 'react-icons/im';
-
+import { useSearchParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import {
   FormButton,
   Input,
@@ -9,13 +10,17 @@ import {
   Container,
 } from './Form.styled';
 
-export default function Form({ getResponse, onSubmit }) {
+export default function Form({ onSubmit }) {
   const [inputValue, setInputValue] = useState('');
-
+  const [searchParams] = useSearchParams();
+  useEffect(() => {
+    if (searchParams.get('q')) {
+      setInputValue(searchParams.get('q'));
+    }
+  }, [searchParams]);
   const getMoviesBySearch = e => {
     e.preventDefault();
     onSubmit(inputValue);
-    setInputValue('');
   };
   const inputHandler = e => {
     setInputValue(e.currentTarget.value);
@@ -41,3 +46,6 @@ export default function Form({ getResponse, onSubmit }) {
     </Container>
   );
 }
+Form.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
