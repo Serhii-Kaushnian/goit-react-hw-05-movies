@@ -1,4 +1,10 @@
-import { Outlet, useParams, useNavigate } from 'react-router-dom';
+import {
+  Outlet,
+  useParams,
+
+  useLocation,
+
+} from 'react-router-dom';
 import {
   MovieCustomLinksWrapper,
   MovieDetailsWrapper,
@@ -18,8 +24,9 @@ const APP_KEY = `8fcb73b25bea8ff19ff1e6b792856201`;
 const BASE_URL = `https://api.themoviedb.org/3/`;
 export default function MovieDetails() {
   const { id } = useParams();
+  const location = useLocation();
+  const goBack = location.state?.from ?? '/';
 
-  const navigate = useNavigate();
   const [movie, setMovie] = useState([]);
   const [loader, setLoader] = useState(false);
   useEffect(() => {
@@ -48,8 +55,8 @@ export default function MovieDetails() {
   return (
     <>
       {loader && <Loader />}
+      <GoBackLink to={goBack}>Go back</GoBackLink>
 
-      <GoBackLink onClick={() => navigate(-1)}>Go back</GoBackLink>
       {movie && (
         <MovieDetailsWrapper>
           <PosterWrapper>
@@ -85,8 +92,12 @@ export default function MovieDetails() {
         </MovieDetailsWrapper>
       )}
       <MovieCustomLinksWrapper>
-        <CustomLink to="reviews">Review</CustomLink>
-        <CustomLink to="cast">Cast</CustomLink>
+        <CustomLink to="reviews" state={{ from: goBack }}>
+          Review
+        </CustomLink>
+        <CustomLink to="cast" state={{ from: goBack }}>
+          Cast
+        </CustomLink>
       </MovieCustomLinksWrapper>
       <Outlet />
     </>

@@ -38,7 +38,7 @@ export const CustomLink = styled(Link)`
     background-color: #adadad;
   }
 `;
-export const GoBackLink = styled.button`
+export const GoBackLink = styled(Link)`
   display: inline-block;
   text-align: center;
   text-decoration: none;
